@@ -1,4 +1,8 @@
 spring:
+  threads:
+    virtual:
+      enabled: true
+  
   jpa:
     hibernate:
       ddl-auto: update
@@ -7,3 +11,54 @@ spring:
       hibernate:
         dialect: org.hibernate.dialect.PostgreSQLDialect
         format-sql: false
+  
+  datasource:
+    username: diwakar
+    password: diwakar
+    driver-class-name: org.postgresql.Driver
+
+  data:
+    redis:
+      host: localhost
+      port: 6379
+
+  kafka:
+    bootstrap-servers: localhost:29092
+    producer:
+      acks: all
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
+    consumer:
+      group-id: razorpay-distributed
+      auto-offset-reset: earliest
+      enable-auto-commit: false
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
+      properties:
+        spring.json.trusted.package: "com.projects.razorpay.*"
+
+  eureka:
+    client:
+      serviceUrl:
+        defaultZone: http://localhost:8761/eureka/
+      instance:
+        prefer-ip-address: true
+        hostname: localhost
+
+  management:
+    endpoints:
+      web:
+        exposure:
+          includes: health,info
+  
+  logging:
+    level:
+      org.apache.kafka.clients: WARN
+      org.apache.kafka.common: WARN
+  
+  kafka:
+    topics:
+      payments: payments.events
+      orders: orders.events
+      refunds: refunds.events
+      settlements: settlements.events
