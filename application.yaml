@@ -56,9 +56,10 @@ spring:
       org.apache.kafka.clients: WARN
       org.apache.kafka.common: WARN
   
-  kafka:
-    topics:
-      payments: payments.events
-      orders: orders.events
-      refunds: refunds.events
-      settlements: settlements.events
+  app:
+    kafka:
+      topics:
+        payments: payments.events
+        orders: orders.events
+        refunds: refunds.events
+        settlements: settlements.events
