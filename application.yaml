@@ -2,7 +2,7 @@ spring:
   threads:
     virtual:
       enabled: true
-  
+
   jpa:
     hibernate:
       ddl-auto: update
@@ -11,7 +11,7 @@ spring:
       hibernate:
         dialect: org.hibernate.dialect.PostgreSQLDialect
         format-sql: false
-  
+
   datasource:
     username: diwakar
     password: diwakar
@@ -45,29 +45,6 @@ spring:
         prefer-ip-address: true
         hostname: localhost
 
-  management:
-    endpoints:
-      web:
-        exposure:
-          include: health,info,prometheus
-    endpoint:
-      health:
-        show-details: always
-    tracing:
-      sampling:
-        probability: 1.0
-    zipkin:
-      tracing:
-        endpoint: http://localhost:9411/api/v2/spans
-    metrics:
-      tags:
-        application: ${spring.application.name}
-  
-  logging:
-    level:
-      org.apache.kafka.clients: WARN
-      org.apache.kafka.common: WARN
-  
   app:
     kafka:
       topics:
@@ -75,3 +52,30 @@ spring:
         orders: orders.events
         refunds: refunds.events
         settlements: settlements.events
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,prometheus
+
+  endpoint:
+    health:
+      show-details: always
+
+  tracing:
+    sampling:
+      probability: 1.0
+
+  zipkin:
+    tracing:
+      endpoint: http://localhost:9411/api/v2/spans
+
+  metrics:
+    tags:
+      application: ${spring.application.name}
+
+logging:
+  level:
+    org.apache.kafka.clients: WARN
+    org.apache.kafka.common: WARN
