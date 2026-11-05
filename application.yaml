@@ -79,3 +79,6 @@ logging:
   level:
     org.apache.kafka.clients: WARN
     org.apache.kafka.common: WARN
+
+server:
+  address: 0.0.0.0
